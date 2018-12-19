@@ -20,6 +20,20 @@ export default [
         ],
     },
     {
+        title:' UI',
+        key:'UI',
+        content:'',
+        icon:'build',
+        children:[
+            {
+                title:'画廊',
+                key:'gallery',
+                content:'Gallery',
+                children:[],
+            }
+        ],
+    },
+    {
         title:'新闻管理',
         key:'xinwenguanli',
         content:'',

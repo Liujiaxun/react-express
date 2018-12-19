@@ -2,6 +2,8 @@
     width:100%;
     transition all 0.2s;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08)
+    margin-bottom:20px
+    overflow: hidden;
     &.fullScreen
         position:fixed;
         height: 100%;
@@ -17,12 +19,18 @@
         line-height:40px
         font-size:14px;
         display: flex;
+        overflow: hidden;
         .panel-title
             flex:3
             color:#666;
+            overflow: hidden;
+            text-overflow:ellipsis;
+            white-space: nowrap;
         .panel-tool
             flex:2
             text-align: right
+            min-width: 90px
+            overflow: hidden;
             span
                 display: inline-block
                 width:30px;

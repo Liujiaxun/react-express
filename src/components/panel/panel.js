@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { Icon, Popconfirm} from 'antd';
-import echarts from 'echarts'
 import './panel.styl';
-console.log(echarts)
 
 class Panel extends Component {
     constructor(props) {
@@ -12,14 +10,17 @@ class Panel extends Component {
             fullScreen:false
         }
     }   
-    bindChid = (childThis) => {
+
+    getChilds = (childThis) => {
         this.children = childThis;
     }
+
     setShrink = () => {
         const isShrink = !this.state.isShrink;
         this.setState({
             isShrink
         })
+        this.children && this.children.changeView();
     }
 
     setFullScreen = () =>{
@@ -27,8 +28,9 @@ class Panel extends Component {
         this.setState({
             fullScreen
         });
+        console.log(this.children);
+        this.children && this.children.changeView();
     }
-
     render() {
         const { title,Children } = this.props;
         return (
@@ -60,7 +62,7 @@ class Panel extends Component {
                 </div>
                 <div className={this.state.isShrink ? 'panel-content isShrink':this.state.fullScreen ?'panel-content fullScreen':'panel-content'} >
                     <div className='panel-body'>
-                        {Children?<Children  />:''}
+                        {Children?<Children getChilds={this.getChilds}  />:''}
                     </div>
                 </div>
             </div>

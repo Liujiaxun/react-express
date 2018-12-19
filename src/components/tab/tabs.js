@@ -7,6 +7,7 @@ class RouterTabs extends Component {
         super(props);
         this.state = {
             activeKey: props.activeKey,
+            allChildsFun:{}
         }
     }
     componentDidMount() {
@@ -14,8 +15,7 @@ class RouterTabs extends Component {
     }
 
     onChange = (activeKey) => {
-        console.log(activeKey)
-        this.tabPaneChild.refresh();
+        this.state.allChildsFun[activeKey] && this.state.allChildsFun[activeKey].refresh();
     }
 
     onEdit = (targetKey, action) => {
@@ -28,7 +28,11 @@ class RouterTabs extends Component {
         });
     }
     refresh = (childThis) =>{
-        this.tabPaneChild = childThis;
+        let allChildsFun = this.state.allChildsFun;
+        allChildsFun[this.state.activeKey] = childThis;
+        this.setState({
+            allChildsFun
+        })
     }
     remove = closeKey => {
         let Pane = this.props.Pane;
@@ -46,7 +50,6 @@ class RouterTabs extends Component {
         this.props.handPaneAndActiveKey(newPane, newActiveKey);
     }
     newRender = (actions, data) => {
-        // 正确！JSX 标签名可以为大写开头的变量。
         const SpecificStory = Components[actions.content];
         return <SpecificStory  refresh={this.refresh} setValue={data} />;
     }
@@ -63,7 +66,7 @@ class RouterTabs extends Component {
                 onEdit={this.onEdit}
             >
                 {
-                    pane.map(item => <TabPane style={{ overflowY: 'auto',height:'100%'}} key={item.key}
+                    pane.map(item => <TabPane style={{ overflowY: 'auto',height:'100%',paddingBottom: '60px'}} key={item.key}
                         closable={item.close} tab={item.title}>
                         {item.content ? this.newRender(item, item) : item.key}
                     </TabPane>)

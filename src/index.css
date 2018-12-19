@@ -12,11 +12,6 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
-#components-layout-demo-custom-trigger .trigger {
-  
-}
-
 #components-layout-demo-custom-trigger .trigger:hover {
   color: #1890ff;
 }

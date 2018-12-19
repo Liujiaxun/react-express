@@ -32,8 +32,6 @@ class App extends Component {
     },this.RouterTabs.onTabClick(activeKey));
   }
   menuClick = (val) => {
-    // console.log(val.item.props);
-    // return
     const Pane = this.state.Pane;
     let data = {
       title:val.item.props.data.title,
@@ -41,7 +39,6 @@ class App extends Component {
       content:val.item.props.data.content
     };
     const activeKey = data.key;
-
     for(let index in Pane){
       let paneItem = Pane[index];
       if(activeKey === paneItem.key){
@@ -84,7 +81,11 @@ class App extends Component {
           </Menu>
         </Sider>
         <Layout>
-        <Header style={{ background: '#fff', padding: 0 ,height:'60px'}} />
+        <Header style={{ background: '#fff', padding: 0 ,height:'60px'}}>
+          <div className='header-content'>
+          
+          </div>
+        </Header>
           <Content style={{padding:'10px',height:'100%'}}>
             <div style={{background:'#fff',height:'100%'}}>
               <RouterTabs onRef={this.onRef} Pane={this.state.Pane} handPaneAndActiveKey={this.handPaneAndActiveKey} activeKey= {this.state.activeKey} />
