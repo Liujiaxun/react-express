@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Layout,Menu, Icon, Switch,  Dropdown } from 'antd';
+import { Layout,Menu, Icon, Switch,  Dropdown, Badge } from 'antd';
 import RouterTabs from './tab/tabs';
 import MenuData from '../router/menu';
 import {themeColor} from './theme';
@@ -13,6 +13,7 @@ class App extends Component {
       collapsed: false,
       toolShow: false,
       selectThemeColorIndex:Number(LocalStorages.get('_LJXADMINTHEMECOLORINDEX'))|| 0,
+      headerClickIndex:null,
       Pane:[
         {
           title:'首页',
@@ -51,24 +52,13 @@ class App extends Component {
     },this.RouterTabs.onTabClick(activeKey));
   }
   componentDidMount(){
-    let objs = document.getElementsByClassName('headerItem');
-    for(let i=0; i<objs.length;i++){
-      objs[i].onclick = function(e){
-        let className = objs[i].className;
-        objs[i].className = className + ' active'
-        for(let j=0;j<objs.length;j++){
-          if(j !== i){
-            objs[j].className = className;
-          }
-        }
-      }
-    }
-    // objs.forEach(element => {
-    //   console.log(element)
-    // });
+
   }
   headerItemClick(e){
-    console.log(e.getAttr)
+    const index = Number(e.currentTarget.getAttribute('index'));
+    this.setState({
+      headerClickIndex:index
+    })
   }
 
   menuClick = (val) => {
@@ -121,6 +111,7 @@ class App extends Component {
         </Menu.Item>
       </Menu>
     )
+    const userPhoto = 'http://tupian.qqjay.com/tou2/2018/0414/812ac9992b9cee396b9b836f405b1fd9.jpg'
     return (
       <Layout style={{height:'100%'}}>
         <Sider
@@ -128,7 +119,9 @@ class App extends Component {
           collapsed={this.state.collapsed}
           onCollapse={this.toggle}
         >
-          <div className="logo" style={{backgroundColor:themeColor[this.state.selectThemeColorIndex]}} />
+          <div className="logo" style={{backgroundColor:themeColor[this.state.selectThemeColorIndex]}} >
+            <div className="logoImg"></div>
+          </div>
           <Menu theme="dark" defaultSelectedKeys={[MenuData[0].key]} mode="inline">
             {MenuData.map(item=> item.children.length > 0 ? <SubMenu
               key={item.key} 
@@ -149,15 +142,17 @@ class App extends Component {
         <Header style={{ background: '#fff', padding: 0 ,height:'60px'}}>
           <div className='header-content' style={{background:`linear-gradient(to right, ${themeColor[this.state.selectThemeColorIndex]}, rgba(210, 216, 216,.5))`}}>
               <Dropdown overlay={userMenu} trigger={['click']}>
-                <div className='headerItem userPhoto'>
+                <div  index={1} className={this.state.headerClickIndex === 1 ? 'headerItem userPhoto active':'headerItem userPhoto'}  onClick={(e)=>this.headerItemClick(e)}>
                     <div className='Avatar'>
-                      <img alt='exprot' src="http://tupian.qqjay.com/tou2/2018/0414/812ac9992b9cee396b9b836f405b1fd9.jpg" />
+                      <img alt='exprot' src={userPhoto} />
                     </div>
                 </div>
               </Dropdown>
-              <div className='headerItem Notification'>
-                    <Icon type='notification' className='rotate' />
-                </div>
+              <div index={2} className={this.state.headerClickIndex === 2 ? 'headerItem Notification active':'headerItem Notification'}  onClick={(e)=>this.headerItemClick(e)}>
+                <Badge count={99} overflowCount={10}>
+                  <Icon type='notification' className='rotate' />
+                </Badge>
+              </div>
           </div>
         </Header>
           <Content style={{padding:'10px',height:'100%'}}>

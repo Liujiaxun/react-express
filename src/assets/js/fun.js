@@ -114,3 +114,21 @@ export const LocalStorages = {
         localStorage.key(index);
     }
 }
+
+export const SessionStorages = {
+    get(key){
+        return sessionStorage.getItem(key) || null;
+    },
+    set(key,value){
+        sessionStorage.setItem(key,value);
+    },
+    del(key){
+        sessionStorage.removeItem(key);
+    },
+    clear(){
+        sessionStorage.clear();
+    },
+    getKey(index){
+        sessionStorage.key(index);
+    }
+}

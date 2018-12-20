@@ -9,13 +9,18 @@
 .ant-tabs-content{
   height:100%!important;
 }
-.logo{
+.logo
   width:100%;
   height: 60px;
   background: #fff;
   margin-bottom:10px;
   transition:all .3s;
-}
+  padding:15px
+  .logoImg
+      width:100%;
+      height:100%;
+      background: #fff;
+      border-radius: 10px;
 
 .indexCard
     width:100%;
@@ -80,6 +85,7 @@
         width:60px
         padding:10px;
         height:100%;
+        text-align: center
         &.active
             opacity 1
             &:after
@@ -115,6 +121,8 @@
                 img
                     width:100%;
                     height:100%;
+        &.Notification
+            font-size:20px;
 .theme-tool
     background:#fff;
     width:220px;
@@ -188,4 +196,21 @@
         color:rbga(0,0,0,0.65);
 .rotate
     transform: rotateY(180deg);
-    font-size: 22px;
+    font-size: 20px;
+    padding-top: 4px;
+    padding-left: 6px;
+    padding-bottom:4px
+    margin-bottom: 4px;
+.login
+    width:100%;
+    height: 100%;
+    background:url('../img/loginbg2.png') no-repeat;
+    background-size:cover;
+    background-position: 50%;
+    position:relative;
+    .loginForm
+        position: absolute;
+        right: 160px;
+        top: 50%;
+        transform: translateY(-60%);
+        width: 300px;
