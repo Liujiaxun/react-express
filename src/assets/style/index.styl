@@ -14,6 +14,7 @@
   height: 60px;
   background: #fff;
   margin-bottom:10px;
+  transition:all .3s;
 }
 
 .indexCard
@@ -67,3 +68,124 @@
 .header-content
     width:100%;
     height:100%
+    transition:all .3s;
+    line-height: 60px;
+    padding:0 10px
+    .headerItem
+        display:inline-block
+        float right;
+        cursor pointer
+        position relative
+        margin-left:10px
+        width:60px
+        padding:10px;
+        height:100%;
+        &.active
+            opacity 1
+            &:after
+                content:'';
+                width:calc(100%+0px);
+                height:2px;
+                background:#00152a;
+                transition:all .4s;
+                position absolute;
+                bottom -1px;
+                left:0
+        &:after
+            content:'';
+            width:0;
+            height:2px;
+            background:#00152a;
+            transition:all .4s;
+            position absolute;
+            bottom -1px;
+            left:0
+        &:hover 
+            &:after
+                width:calc(100%+0px);
+        &.userPhoto
+            width:60px
+            height:100%;
+            .Avatar
+                width:100%;
+                height: 100%;
+                border-radius: 50%
+                overflow hidden
+                line-height: 40px;
+                img
+                    width:100%;
+                    height:100%;
+.theme-tool
+    background:#fff;
+    width:220px;
+    position:fixed;
+    top:120px;
+    right:-220px
+    z-index:1049
+    transition:all 0.3s;
+    min-height: 130px;
+    &.active
+        right:15px;
+    .toolBox
+        width:100%;
+        height:100%;
+        border:1px solid rgba(120, 120, 120, 0.1);
+        min-height: 130px
+        box-shadow: 2px 1px 2px #e8e8e8
+        padding:20px 10px
+        .boxItem
+            width:80px;
+            height:24px;
+            float:left;
+            padding-top:1px;
+            margin-right:15px
+            margin-bottom:10px
+            .boxItem-color
+                width:22px;
+                height:22px;
+                display: inline-block;
+                float:left;
+                margin-right:10px;
+                border:1px solid rgba(120, 130, 140, 0.13)
+    #toggleTheme
+        height:40px;
+        width:40px;
+        text-align: center
+        display: inline-block
+        background:#fff;
+        cursor pointer
+        transition:all .5s;
+        border:1px solid rgba(120, 120, 120, 0.1);
+        border-right:0;
+        position: absolute;
+        top:0;
+        left:-39px
+        i
+            display: inline-block
+            font-size:18px
+            transition: all .5s;
+            width:100%;
+            height:100%;
+            &:hover
+                transform: rotate(360deg);
+                color:red!important;
+            svg 
+                margin-top:10px;
+// #toggleTheme:hover + #toggleTheme i{
+//     color:red!important
+// }
+.ant-switch-checked
+    background:#001529
+.userMenus
+    .userMenu
+        width:160px;
+        padding:8px 6px;
+        color:rgba(0,0,0,0.45)
+    .userItem
+        width:100%;
+        padding:5px 0 10px 40px
+        font-size: 12px;
+        color:rbga(0,0,0,0.65);
+.rotate
+    transform: rotateY(180deg);
+    font-size: 22px;

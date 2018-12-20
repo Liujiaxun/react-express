@@ -69,7 +69,7 @@ class Gallery extends Component{
             })
         ))
         return (
-            <div>
+            <div style={{padding:'10px'}}>
                 <Row gutter={10}>
                     <Col className="gutter-row" md={5}>
                         {imgCard[0]}

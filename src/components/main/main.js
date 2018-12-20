@@ -43,7 +43,9 @@ const Bar = (props) => {
                 barWidth: 15,
                 barGap:'5%',/*多个并排柱子设置柱子之间的间距*/
                 barBorderRadius: [5, 5, 0, 0] 
-            }]
+            }],
+            animationDuration: 2000
+
         };
     return (
             <Echart type='bar' width='1000px' height='200px' option={option} title='工作内容完成图' getChilds={props.getChilds} propsId='Bar'/>

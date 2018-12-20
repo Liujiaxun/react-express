@@ -30,6 +30,12 @@ export default [
                 key:'gallery',
                 content:'Gallery',
                 children:[],
+            },
+            {
+                title:'Form',
+                key:'form',
+                content:'Forms',
+                children:[],
             }
         ],
     },

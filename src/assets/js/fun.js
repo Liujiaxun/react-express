@@ -94,3 +94,23 @@ export const gradientColor = function (startColor, endColor, step) {
         var random = Math.floor(Math.random()*(m-n+1)+n);
         return random;
     }
+/**
+ * @Object LocalStorages  方法名
+ */
+export const LocalStorages = {
+    get(key){
+        return localStorage.getItem(key) || null;
+    },
+    set(key,value){
+        localStorage.setItem(key,value);
+    },
+    del(key){
+        localStorage.removeItem(key);
+    },
+    clear(){
+        localStorage.clear();
+    },
+    getKey(index){
+        localStorage.key(index);
+    }
+}
