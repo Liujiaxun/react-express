@@ -5,8 +5,8 @@ var mysql=require('mysql');
         var client=mysql.createConnection({
             host:'localhost',
             user:'root',
-            password:'abc123456',
-            database:'dby'
+            password:'',
+            database:'react'
         })
         return client;
     }

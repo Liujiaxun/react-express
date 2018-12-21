@@ -82,7 +82,14 @@ module.exports = function(proxy, allowedHost) {
       disableDotRule: true,
     },
     public: allowedHost,
-    proxy,
+    proxy, 
+  //   {
+  //     '/*': {
+  //         target: 'https://api.mch.weixin.qq.com',
+  //         secure: false, // 接受 运行在 https 上的服务
+  //         changeOrigin: true
+  //     }
+  // },
     before(app, server) {
       if (fs.existsSync(paths.proxySetup)) {
         // This registers user provided middleware for proxy reasons
