@@ -1,5 +1,8 @@
 import React,{Component} from 'react';
 import { Form, Icon, Input, Button, Checkbox, } from 'antd';
+import {withRouter} from 'react-router-dom';
+import http from '../assets/js/axios'
+import {SessionStorages} from '../assets/js/fun'
 const FormItem = Form.Item;
 
 class Login extends Component {
@@ -8,10 +11,23 @@ class Login extends Component {
     }
     handleSubmit = (e) => {
         e.preventDefault();
+        const self = this;
         this.props.form.validateFields((err, values) => {
-          if (!err) {
-            console.log('Received values of form: ', values);
-          }
+            if (!err) {
+                let data = {
+                    username:values.userName,
+                    password:values.password
+                }
+                http.post('/api/login',[data]).then(res=>{
+                    const resData = res.data;
+                    if(resData.code === 200 ){
+                        SessionStorages.set('_REACTLJXADMINTOKEN',resData.data);
+                        self.props.history.push('/index');
+                    }
+                }).catch(err=>{
+
+                })
+            }
         });
       }
     render(){
@@ -23,7 +39,6 @@ class Login extends Component {
                         <div className="login-logo">
                             Admin
                         </div>
-                        
                         <Form onSubmit={this.handleSubmit} className="login-form">
                             <FormItem>
                             {getFieldDecorator('userName', {
@@ -53,7 +68,6 @@ class Login extends Component {
                             Or <a href="/">register now!</a>
                             </FormItem>
                         </Form>
-                        
                     </div>
                     <div className="back"></div>
                 </div>
@@ -62,4 +76,4 @@ class Login extends Component {
     }
 }
 
-export default Form.create()(Login);
+export default Form.create()(withRouter(Login));

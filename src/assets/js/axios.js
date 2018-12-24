@@ -6,12 +6,13 @@ import qs from 'qs';
 import { SessionStorages } from './fun';
 // axios.defaults.baseUrl  = 'http:127.0.0.1:3001';
 //超时响应
-axios.defaults.timeout = 5000;
+// axios.defaults.timeout = 5000;
 axios.defaults.withCredentials = true
 // 添加请求拦截器
 axios.interceptors.request.use(function (config) {
     // 在发送请求之前做些什么
-    config.data = qs.stringify(config.data);
+    config.headers.Authorization = SessionStorages.get('_REACTLJXADMINTOKEN') || '';
+    config.data = qs.stringify(config.data, {arrayFormat: 'brackets'})
     return config;
   }, function (error) {
     // 对请求错误做些什么
@@ -38,7 +39,7 @@ let http = {
     all:null
 }
 
-http.get = (api,data) => {
+http.get = (api,data=[]) => {
     return new Promise((resolve, reject) => {
       axios.get(api,...data).then(res=>{
           resolve(res);
@@ -49,7 +50,7 @@ http.get = (api,data) => {
     
 }
 
-http.post = (api,data) => {
+http.post = (api,data=[]) => {
     return new Promise((resolve, reject) => {
       axios.post(api,...data).then(res=>{
           resolve(res);

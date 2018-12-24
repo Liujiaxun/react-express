@@ -3,6 +3,7 @@ import {Row,Col,Spin,Icon,Timeline,Card,} from 'antd'
 import {rnd} from '../../assets/js/fun'
 import Panel from '../panel/panel'
 import Echart from '../ECharts'
+import http from '../../assets/js/axios';
 const {Meta} = Card;
 const Bar = (props) => {
     let xLineData = () => {let x=[];for(let i=1;i<=50;i++){x.push(i)};return x;}
@@ -136,12 +137,21 @@ class Main extends Component {
         this.setState({
             loading:true
         });
-        setTimeout(function(){
+        // setTimeout(function(){
+        //     self.setState({
+        //         loading:false
+        //     });
+        //     console.log('刷新了');
+        // },1000)
+        http.get('/api/index').then(res => {
             self.setState({
                 loading:false
             });
-            console.log('刷新了');
-        },1000)
+            console.log(res);
+        }).catch(err => {
+            
+        })
+        
     }
     render () {
         return (

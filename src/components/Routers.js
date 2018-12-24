@@ -3,7 +3,7 @@ import { Switch, BrowserRouter as Router, Route, Redirect} from 'react-router-do
 import App from './App';
 import Login from './Login';
 import {SessionStorages} from '../assets/js/fun'
-import http from '../assets/js/axios'
+// import http from '../assets/js/axios'
 const Redirects = ()=> <Redirect to={'login'}/>;
 const Mismatching = () =>{
     return (
@@ -36,11 +36,8 @@ class Routers extends Component{
     };
 
     isAuth(component){
-        http.get('/api/login',[{id:1}]).then(res=>{
-            console.log(res)
-        });
-        const REACTLJXADMIN = SessionStorages.get('_REACTLJXADMIN')
-        if(REACTLJXADMIN){
+        const _REACTLJXADMINTOKEN = SessionStorages.get('_REACTLJXADMINTOKEN')
+        if(_REACTLJXADMINTOKEN){
             return component;
         }
         return Redirects;
