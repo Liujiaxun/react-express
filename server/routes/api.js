@@ -68,10 +68,9 @@ router.all('*', function(req, res, next) {
                 if(err){
                     jsonResponse(res,40164,'请先登录');
                 }
-                console.log(data);
-
+                client.expire(authorization,redisConfig.TOKENTIME);
+                next();
             });
-            next();
         }else{
             jsonResponse(res,40164,'请先登录');
         }

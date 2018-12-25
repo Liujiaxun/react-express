@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import { Form, Icon, Input, Button, Checkbox, } from 'antd';
+import { Form, Icon, Input, Button, Checkbox,message } from 'antd';
 import {withRouter} from 'react-router-dom';
 import http from '../assets/js/axios'
 import {SessionStorages} from '../assets/js/fun'
@@ -7,13 +7,18 @@ const FormItem = Form.Item;
 
 class Login extends Component {
     state = {
-        userName:''
+        userName:'',
+        loading:false
     }
     handleSubmit = (e) => {
+
         e.preventDefault();
-        const self = this;
+        const history = this.props.history;
         this.props.form.validateFields((err, values) => {
             if (!err) {
+                this.setState({
+                    loading:true
+                });
                 let data = {
                     username:values.userName,
                     password:values.password
@@ -22,10 +27,15 @@ class Login extends Component {
                     const resData = res.data;
                     if(resData.code === 200 ){
                         SessionStorages.set('_REACTLJXADMINTOKEN',resData.data);
-                        self.props.history.push('/index');
+                        message.loading('登录中...', 1).then(() => {
+                            message.success(resData.message,2)
+                            history.push('/');
+                        })
                     }
                 }).catch(err=>{
-
+                    this.setState({
+                        loading:false
+                    });
                 })
             }
         });
@@ -62,7 +72,7 @@ class Login extends Component {
                                 <Checkbox>Remember me</Checkbox>
                             )}
                             <a className="login-form-forgot" href="/">Forgot password</a>
-                            <Button type="primary" htmlType="submit" className="login-form-button">
+                            <Button type="primary" loading={this.state.loading} htmlType="submit" className="login-form-button">
                                 Log in
                             </Button>
                             Or <a href="/">register now!</a>
